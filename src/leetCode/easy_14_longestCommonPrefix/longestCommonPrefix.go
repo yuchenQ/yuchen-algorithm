@@ -1,5 +1,7 @@
 package longestcommonprefix
 
+import "strings"
+
 // https://leetcode-cn.com/problems/longest-common-prefix/
 
 // 解法1：横向扫描法(standard)
@@ -42,7 +44,7 @@ func min(x, y int) int {
 	return y
 }
 
-// 解法1：横向扫描法(mutation)
+// 解法1.1：横向扫描法(mutation)
 func longestCommonPrefixA1(strs []string) string {
 	if len(strs) == 0 {
 		return ""
@@ -68,6 +70,27 @@ func longestCommonPrefixA1(strs []string) string {
 	}
 
 	return strs[0][:minIndex+1]
+}
+
+// 解法1.2：横向扫描法(mutation)
+func longestCommonPrefixA2(strs []string) string {
+	if len(strs) == 0 {
+		return ""
+	}
+
+	prefix := strs[0]
+
+	for i := 1; i < len(strs); i++ {
+		for strings.Index(strs[i], prefix) != 0 {
+			if len(prefix) == 0 {
+				return ""
+			}
+
+			prefix = prefix[:len(prefix)-1]
+		}
+	}
+
+	return prefix
 }
 
 // ============================================================================
