@@ -1,15 +1,9 @@
 package longestcommonprefix
 
-func Min(a, b int) int {
-	if a < b {
-		return a
-	} else {
-		return b
-	}
-}
+import helper "yuchen-algorithm/src/leetCode/helper"
 
 func Lcp(a, b string) string {
-	length := Min(len(a), len(b))
+	length := helper.Min(len(a), len(b))
 
 	for i := 0; i < length; i++ {
 		if a[i] != b[i] {
