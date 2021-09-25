@@ -33,6 +33,7 @@ func minimumTotalTwoDimensionDP(triangle [][]int) int {
 	return result
 }
 
+// 回溯法从底向上
 func minimumTotalFromBottomToTop(triangle [][]int) int {
 	for i := len(triangle) - 2; i >= 0; i-- {
 		for j := 0; j < len(triangle[i]); j++ {
