@@ -3,7 +3,7 @@ package minpathsum
 import "yuchen-algorithm/src/leetCode/helper"
 
 // dp 二维数组
-func minPathSum(grid [][]int) int {
+func minPathSumDoubleDpArray(grid [][]int) int {
 	dp := make([][]int, len(grid))
 
 	for i, arr := range grid {
@@ -25,6 +25,22 @@ func minPathSum(grid [][]int) int {
 	}
 
 	return dp[len(grid)-1][len(dp[len(grid)-1])-1]
+}
+
+func minPathSumAccumlate(grid [][]int) int {
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[i]); j++ {
+			if i == 0 && j != 0 {
+				grid[i][j] += grid[i][j-1]
+			} else if j == 0 && i != 0 {
+				grid[i][j] += grid[i-1][j]
+			} else if i != 0 && j != 0 {
+				grid[i][j] += helper.Min(grid[i-1][j], grid[i][j-1])
+			}
+		}
+	}
+
+	return grid[len(grid)-1][len(grid[len(grid)-1])-1]
 }
 
 // 回溯法从底向上
