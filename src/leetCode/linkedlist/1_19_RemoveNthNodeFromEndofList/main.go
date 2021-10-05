@@ -5,6 +5,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
 // 时间复杂度：O(L)，其中 L是链表的长度。
 // 空间复杂度：O(1)
 func removeNthFromEndDoublePointer(head *ListNode, n int) *ListNode {
