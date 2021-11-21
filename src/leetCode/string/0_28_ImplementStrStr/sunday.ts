@@ -1,3 +1,4 @@
+// https://leetcode-cn.com/problems/implement-strstr/solution/python3-sundayjie-fa-9996-by-tes/
 function strStrSunday(haystack: string, needle: string): number {
   if (needle === "") {
     return 0;
