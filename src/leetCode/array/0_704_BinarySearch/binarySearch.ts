@@ -1,5 +1,7 @@
 // https://leetcode-cn.com/problems/binary-search/
 // https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html#%E6%80%9D%E8%B7%AF
+
+// 闭区间
 function binarySearchCloseRange(nums: number[], target: number): number {
   let left = 0, right = nums.length - 1;
 
@@ -17,6 +19,7 @@ function binarySearchCloseRange(nums: number[], target: number): number {
   return -1;
 };
 
+// 开区间
 function binarySearchOpenRange(nums: number[], target: number): number {
   let left = 0, right = nums.length;
 
