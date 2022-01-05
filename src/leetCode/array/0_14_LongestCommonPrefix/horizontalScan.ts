@@ -17,7 +17,7 @@ function lcp(a: string, b: string): string {
   let prefix = a
 
   while (!b.startsWith(prefix)) {
-    prefix = prefix.substr(0, prefix.length - 1);
+    prefix = prefix.substring(0, prefix.length - 1);
   }
 
   return prefix;
