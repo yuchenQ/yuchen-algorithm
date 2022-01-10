@@ -10,7 +10,8 @@ function detectCycle(head: ListNode | null): ListNode | null {
   while (head !== null) {
     if (set.has(head)) return head;
 
-    set.add(head), head = head?.next;
+    set.add(head);
+    head = head?.next;
   }
 
   return null;
