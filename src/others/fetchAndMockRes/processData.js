@@ -55,16 +55,11 @@ const calcAverageByRecursion = (dataset) => {
     recursion(shape);
   }
 
-  const avg = {
-    r: Math.round(result.r / result.count),
-    g: Math.round(result.g / result.count),
-    b: Math.round(result.b / result.count),
-  };
+  result.r = Math.round(result.r / result.count);
+  result.g = Math.round(result.g / result.count);
+  result.b = Math.round(result.b / result.count);
 
-  return {
-    result,
-    avg,
-  };
+  return result;
 };
 
 const calcAverage = (dataset) => {
@@ -92,16 +87,11 @@ const calcAverage = (dataset) => {
     }
   }
 
-  const avg = {
-    r: Math.round(result.r / result.count),
-    g: Math.round(result.g / result.count),
-    b: Math.round(result.b / result.count),
-  };
+  result.r = Math.round(result.r / result.count);
+  result.g = Math.round(result.g / result.count);
+  result.b = Math.round(result.b / result.count);
 
-  return {
-    result,
-    avg,
-  };
+  return result;
 }
 
 console.log(calcAverageByRecursion(dataset));
