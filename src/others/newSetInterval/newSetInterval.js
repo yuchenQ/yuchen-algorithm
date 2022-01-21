@@ -2,30 +2,38 @@
 // setInterval 如果定时器执行过程中出现了耗时操作
 // 多个回调函数会在耗时操作结束以后同时执行，这样可能就会带来性能上的问题
 
-function setIntervalX(callback, interval) {
-  let timer;
+function setIntervalX() {
+  const timer = { value: null };
 
-  let startTime = Date.now();
-  let endTime = startTime;
+  const loop = (interval, cb) => {
+    if (!window || !window.requestAnimationFrame) return;
 
-  const loop = () => {
-    // 下一帧再call requestAnimationFrame
-    timer = window.requestAnimationFrame(loop);
-    endTime = Date.now();
-    if (endTime - startTime >= interval) {
-      startTime = endTime = Date.now();
-      callback(timer);
-    }
+    let startTime = Date.now();
+    let endTime = startTime;
+
+    const fn = () => {
+      timer.value = window.requestAnimationFrame(fn);
+
+      endTime = Date.now();
+      if (endTime - startTime >= interval) {
+        endTime = startTime = Date.now();
+        cb(timer);
+      }
+    };
+
+    timer.value = window.requestAnimationFrame(fn);
   };
 
-  // requestAnimationFrame 是一次性的
-  timer = window.requestAnimationFrame(loop);
-  return timer;
+  return { timer, loop };
 }
 
 let a = 0;
-setIntervalX((timer) => {
+const interval = setIntervalX();
+const timer = interval.timer;
+const intervalFn = interval.loop;
+
+intervalFn((timer) => {
   console.log(1);
   a++;
-  if (a === 3) window.cancelAnimationFrame()(timer);
+  if (a === 3) window.cancelAnimationFrame(timer.value);
 }, 1000);
