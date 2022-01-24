@@ -1,17 +1,10 @@
-class LinkListNode {
-  public val: number
-  public next: LinkListNode | null
+// https://leetcode-cn.com/problems/design-linked-list/
+import { LinkedListNode } from './linkedListNode';
 
-  constructor(val?: number, next?: LinkListNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-  }
-}
-
-class MyLinkedList {
+export class MyLinkedList {
   private length: number
-  private head: LinkListNode | null
-  private tail: LinkListNode | null
+  private head: LinkedListNode | null
+  private tail: LinkedListNode | null
 
   constructor() {
     this.length = 0;
@@ -19,8 +12,8 @@ class MyLinkedList {
     this.tail = null;
   }
 
-  private getNode(index: number): LinkListNode {
-    let cur: LinkListNode = new LinkListNode(0, this.head);
+  private getNode(index: number): LinkedListNode {
+    let cur: LinkedListNode = new LinkedListNode(0, this.head);
     for (let i = 0; i <= index; i++) {
       cur = cur.next;
     }
@@ -35,7 +28,7 @@ class MyLinkedList {
   }
 
   addAtHead(val: number): void {
-    const node = new LinkListNode(val, this.head);
+    const node = new LinkedListNode(val, this.head);
     this.head = node;
 
     if (!this.tail) {
@@ -45,7 +38,7 @@ class MyLinkedList {
   }
 
   addAtTail(val: number): void {
-    const node = new LinkListNode(val);
+    const node = new LinkedListNode(val);
 
     if (!this.tail) {
       this.head = node;
@@ -64,7 +57,7 @@ class MyLinkedList {
     if (index === 0) return this.addAtHead(val);
 
     const beforeNode = this.getNode(index - 1);
-    const node = new LinkListNode(val, beforeNode.next);
+    const node = new LinkedListNode(val, beforeNode.next);
 
     beforeNode.next = node;
     this.length++;
