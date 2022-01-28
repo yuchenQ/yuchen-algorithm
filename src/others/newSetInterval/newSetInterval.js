@@ -24,16 +24,21 @@ function setIntervalX() {
     timer.value = window.requestAnimationFrame(fn);
   };
 
-  return { timer, loop };
+  const cancel = () => {
+    if (!window || !window.requestAnimationFrame) return;
+    window.cancelAnimationFrame(timer.value);
+  };
+
+  return { call: loop, cancel };
 }
 
 let a = 0;
 const interval = setIntervalX();
-const timer = interval.timer;
-const intervalFn = interval.loop;
 
-intervalFn((timer) => {
+interval.call((timer) => {
   console.log(1);
   a++;
   if (a === 3) window.cancelAnimationFrame(timer.value);
 }, 1000);
+
+interval.cancel();

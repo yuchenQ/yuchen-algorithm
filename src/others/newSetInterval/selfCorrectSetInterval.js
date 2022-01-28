@@ -5,7 +5,7 @@
 function selfCorrectSetInterval() {
   const timer = { value: null };
 
-  const loop = (interval, totalTimes, cb) => {
+  const loop = (interval, cb) => {
     const startTime = Date.now();
     let count = 0;
 
@@ -19,23 +19,19 @@ function selfCorrectSetInterval() {
       }
 
       timer.value = setTimeout(fn, nextTime);
-      cb(timer);
-
-      if (count === totalTimes) {
-        clearTimeout(timer.value);
-        timer.value = null;
-      }
+      cb(timer.value);
     };
     timer.value = setTimeout(fn, interval);
   };
 
-  return { timer, loop };
+  return { call: loop, cancel: () => clearTimeout(timer.value) };
 }
 
-let a = 1;
+let a = 0;
 const interval = selfCorrectSetInterval();
-const intervalFn = interval.loop;
-intervalFn(1000, 5, () => {
-  console.log(a);
+interval.call(1000, () => {
   a += 1;
+  console.log(a);
+
+  if (a === 5) interval.cancel();
 });
