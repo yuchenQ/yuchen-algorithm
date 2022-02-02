@@ -23,7 +23,7 @@ function rotateString(s: string, goal: string): boolean {
 
 // 时间复杂度: O(n2)
 // 空间复杂度: O(n)
-function rotateStringCcncatTwoS(s: string, goal: string): boolean {
+function rotateStringConcatTwoS(s: string, goal: string): boolean {
   return s.length === goal.length && s.concat(s).includes(goal);
 };
 
